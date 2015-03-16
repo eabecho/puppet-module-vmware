@@ -273,14 +273,15 @@ describe 'vmware' do
           :vmware_has_x      => 'false',
           :operatingsystem   => 'Ubuntu',
           :lsbmajdistrelease => '12',
+          :lsbdistid         => 'ubuntu', # for apt
           :lsbdistcodename   => 'precise',
         }
       end
       let(:params) do
         { :prefer_open_vm_tools => 'false',
         }
-
-      it { should_not contain_package('open-vm-tools').with('ensure' => 'present') }
+      end
+      it { should_not contain_package('open-vm-tools') }
       it { should_not contain_package('open-vm-toolbox') }
 
       it { should contain_package('vmware-tools-esx-nox') }
@@ -293,15 +294,15 @@ describe 'vmware' do
         })
       }
       it {
-        should contain_apt::source('vmware-osps').with({
+        should contain_apt__source('vmware-osps').with({
             'location'    => 'http://packages.vmware.com/tools/esx/latest/ubuntu',
-            'release'     => '',
+            'release'     => 'precise',
             'repos'       => 'main',
             'include_src' => false,
-           'enabled'      => '1',
          })
       }
     end
+
   end
 
   context 'with custom values for parameters on machine running on vmware' do

@@ -71,6 +71,18 @@ String to pass to ensure attribute for the vmwaretools nox package.
 
 - *Default*: 'present'
 
+manage_service
+--------------
+If vmwaretools service should be managed (boolean)
+
+- *Default*: true
+
+service_name
+------------
+Service name to manage (string).
+
+- *Default*: 'USE_DEFAULTS', based on OS platform
+
 manage_tools_x_package
 ----------------------
 Should vmwaretools x package be managed?
